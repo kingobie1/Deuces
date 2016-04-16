@@ -39,6 +39,5 @@ public class DeucesMoveDealCard extends Move {
 	public boolean valid(Solitaire game) {
 		return !stock.empty();
 	}
-	
-	
+		
 }

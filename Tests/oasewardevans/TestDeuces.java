@@ -26,7 +26,7 @@ public class TestDeuces extends TestCase {
 	// clean up properly
 	@Override
 	protected void tearDown() {
-		gw.setVisible(false);
+		//gw.setVisible(false);
 		gw.dispose();
 	}
 	
@@ -52,28 +52,41 @@ public class TestDeuces extends TestCase {
 		assertEquals(86, deuces.stock.count());
 	}
 	
-	public void testFoundationMove() {
+	public void testTrueWasteToFoundationMove() {
+		assertTrue(!deuces.stock.empty());
 		Card topCard = deuces.stock.peek();
-		DeucesMoveDealCard dcm = new DeucesMoveDealCard(deuces.stock, deuces.wasteColumn);
-		dcm.doMove(deuces); 
+		Card drag = deuces.stock.get();
+	 
+		// Move 3 of spades into foundation of 2 of spades
+		DeucesMoveWasteToFoundation wtf = new DeucesMoveWasteToFoundation(deuces.wasteColumn, deuces.foundation[1], drag);
+		assertTrue (wtf.valid(deuces));
 		
-		// have card in waste pile
+		wtf.doMove(deuces);
+		assertEquals (topCard, deuces.foundation[1].peek());
 	}
 	
-//	public void testMoves() {
-//		// Ace to foundation
-//		Column columnBeingDragged = new Column("columnBeingDragged");
-//		//deuces.tableau[0].add(new Card(Card.ACE, Card.SPADES));
-//		deuces.foundation[0].add(new Card(Card.KING, Card.SPADES));
-//		Card ace = new Card(Card.ACE, Card.SPADES);
-//		columnBeingDragged.add(ace);
+//	public void testFalseWasteToFoundationMove() {
+//		Card topCard = deuces.stock.peek();
+//		Card drag = deuces.stock.get();
 //		
-//		DeucesMoveTableauToFoundation ttf = new DeucesMoveTableauToFoundation( deuces.tableau[0], deuces.foundation[0], columnBeingDragged );
-//		assertTrue (ttf.valid(deuces));
-//		
-//
-//		//tableau[1] new Card(Card.TEN, Card.SPADES);
+//		// Move 3 of spades into foundation of 2 of spades
+//		DeucesMoveWasteToFoundation wtf = new DeucesMoveWasteToFoundation(deuces.wasteColumn, deuces.foundation[2], drag);
+////		assertTrue (!wtf.valid(deuces));
+////		
+////		wtf.doMove(deuces);
+////		assertTrue (topCard != deuces.foundation[2].peek());
 //	}
 	
+//	public void testWasteToTableauMove() {
+//		Card topCard = deuces.stock.peek();
+//		Card drag = deuces.stock.get();
+//		
+//		// Move 3 of spades into foundation of 2 of spades
+//		DeucesMoveWasteToTableau wtt = new DeucesMoveWasteToTableau(deuces.wasteColumn, deuces.tableau[10], drag);
+//		assertTrue (wtt.valid(deuces));
+//		
+//		wtt.doMove(deuces);
+//		//assertEquals (topCard, deuces.foundation[10].peek());
+//	}
 	
 }

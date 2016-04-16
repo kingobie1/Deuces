@@ -50,11 +50,15 @@ public class DeucesMoveTableauToTableau extends Move {
 
 	@Override
 	public boolean valid(Solitaire game) {
-		
-		int numCardsColumnBeingDragged = columnBeingDragged.count();
-		System.out.print(numCardsColumnBeingDragged);
+
 		
 		if (!tableauColumnTo.empty()){
+			// return true if moving an ace on top of a king of the same suit
+			if (tableauColumnTo.peek().isAce() && columnBeingDragged.peek(0).getRank() == 13 
+					&& columnBeingDragged.peek(0).getSuit() == tableauColumnTo.peek().getSuit()){
+				return true;
+			} 
+		
 			// Make sure that the top card in the tableauColumn is one RANK less:
 			if ( columnBeingDragged.peek(0).getRank() != tableauColumnTo.peek().getRank() - 1 ) { return false; }
 			

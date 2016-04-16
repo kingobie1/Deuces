@@ -33,7 +33,6 @@ public class DeucesMoveWasteToTableau extends Move {
 
 	@Override
 	public boolean valid(Solitaire game) {
-		//if ( wasteColumn.empty() ) { return false; }
 		
 		// do the following if the tableau Column is not empty:
 		if (!tableauColumn.empty()){

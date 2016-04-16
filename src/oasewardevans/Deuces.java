@@ -6,6 +6,7 @@ import ks.common.games.Solitaire;
 import ks.common.games.SolitaireUndoAdapter;
 import ks.common.model.Card;
 import ks.common.model.Column;
+import ks.common.model.Deck;
 import ks.common.model.MultiDeck;
 import ks.common.model.Pile;
 import ks.common.view.CardImages;
@@ -19,7 +20,7 @@ import ks.launcher.Main;
 public class Deuces extends Solitaire {
 	/* initialize model */
 	
-	private static final int COL_HEIGHT = 300;
+	private static final int COL_HEIGHT = 340;
 
 	// attributes
 	MultiDeck stock;
@@ -184,7 +185,8 @@ public class Deuces extends Solitaire {
 	
 	// Code to launch Solitaire variation
 	public static void main(String[] args){
-		Main.generateWindow(new Deuces(), 123);
+//		Main.generateWindow(new Deuces(), 123);
+		Main.generateWindow(new Deuces(), Deck.OrderBySuit);
 	}
 
 
