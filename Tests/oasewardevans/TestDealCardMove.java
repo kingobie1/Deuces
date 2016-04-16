@@ -13,7 +13,7 @@ public class TestDealCardMove extends TestCase {
 		GameWindow gw  = Main.generateWindow(deuces, Deck.OrderBySuit);
 		
 		Card topCard = deuces.stock.peek();
-		DealCardMove dcm = new DealCardMove(deuces.stock, deuces.wasteColumn);
+		DeucesMoveDealCard dcm = new DeucesMoveDealCard(deuces.stock, deuces.wasteColumn);
 		
 		// Assert that the game is valid:
 		assertTrue(dcm.valid(deuces));
@@ -34,5 +34,4 @@ public class TestDealCardMove extends TestCase {
 		
 		assertEquals(86, deuces.stock.count());
 	}
-
 }

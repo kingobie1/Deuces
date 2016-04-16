@@ -6,20 +6,19 @@ import ks.common.model.Column;
 import ks.common.model.Move;
 import ks.common.model.Pile;
 
-public class WasteToFoundationMove extends Move {
+public class DeucesMoveWasteToFoundation extends Move {
 
 	Column wasteColumn;
 	Pile foundationPile;
 	Card cardBeingDragged;
 	
-	WasteToFoundationMove( Column source, Pile destination, Card cardBeingDragged ){
+	DeucesMoveWasteToFoundation( Column source, Pile destination, Card cardBeingDragged ){
 		this.wasteColumn = source;
 		this.foundationPile = destination;
 		this.cardBeingDragged = cardBeingDragged;
 	}
 	
-	
-	@Override
+
 	public boolean doMove(Solitaire game) {
 		if (!valid(game)) { return false; }
 		
@@ -28,7 +27,6 @@ public class WasteToFoundationMove extends Move {
 		return true;
 	}
 
-	@Override
 	public boolean undo(Solitaire game) {
 
 		wasteColumn.add(foundationPile.get());
@@ -36,9 +34,8 @@ public class WasteToFoundationMove extends Move {
 		return true;
 	}
 
-	@Override
 	public boolean valid(Solitaire game) {
-		//if ( wasteColumn.empty() ) { return false; }
+		if ( wasteColumn.empty() ) { return false; }
 		
 		// Make sure that the top card in the foundationPile is one RANK less:
 		if ( cardBeingDragged.getRank() != foundationPile.peek().getRank() + 1 ) { return false; }

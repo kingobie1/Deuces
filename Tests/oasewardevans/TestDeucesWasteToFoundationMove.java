@@ -12,7 +12,7 @@ public class TestDeucesWasteToFoundationMove extends TestCase  {
 		GameWindow gw  = Main.generateWindow(deuces, Deck.OrderBySuit);
 		
 		Card topCard = deuces.stock.peek();
-		DealCardMove dcm = new DealCardMove(deuces.stock, deuces.wasteColumn);
+		DeucesMoveDealCard dcm = new DeucesMoveDealCard(deuces.stock, deuces.wasteColumn);
 		
 		// Assert that the game is valid:
 		assertTrue(dcm.valid(deuces));
@@ -26,7 +26,7 @@ public class TestDeucesWasteToFoundationMove extends TestCase  {
 		
 		topCard = deuces.wasteColumn.peek();
 		
-		WasteToFoundationMove w2fm = new WasteToFoundationMove(deuces.wasteColumn, deuces.foundation[8], topCard);
+		DeucesMoveWasteToFoundation w2fm = new DeucesMoveWasteToFoundation(deuces.wasteColumn, deuces.foundation[8], topCard);
 		
 		// Assert that the game is valid:
 		/* can you check if valid for this case? */

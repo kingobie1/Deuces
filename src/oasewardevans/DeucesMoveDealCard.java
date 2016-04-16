@@ -6,12 +6,12 @@ import ks.common.model.Column;
 import ks.common.model.Move;
 import ks.common.model.MultiDeck;
 
-public class DealCardMove extends Move {
+public class DeucesMoveDealCard extends Move {
 	MultiDeck stock;
 	Column waste;
 	
 	// Constructor
-	public DealCardMove(MultiDeck stock, Column waste){
+	public DeucesMoveDealCard(MultiDeck stock, Column waste){
 		this.stock = stock;
 		this.waste = waste;
 	}

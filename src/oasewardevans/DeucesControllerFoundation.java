@@ -4,16 +4,18 @@ import java.awt.event.MouseEvent;
 
 import ks.common.controller.SolitaireReleasedAdapter;
 import ks.common.view.Container;
+import ks.common.view.FanPileView;
 import ks.common.model.Card;
 import ks.common.model.Column;
 import ks.common.model.Move;
 import ks.common.model.Pile;
 import ks.common.view.CardView;
+import ks.common.view.ColumnView;
 import ks.common.view.PileView;
 import ks.common.view.Widget;
 
 
-public class DeucesFoundationController extends SolitaireReleasedAdapter {
+public class DeucesControllerFoundation extends SolitaireReleasedAdapter {
 
 	// The Deuces Game.
 	protected Deuces theGame;
@@ -22,7 +24,7 @@ public class DeucesFoundationController extends SolitaireReleasedAdapter {
 	protected PileView src;
 
 	// FoundationController constructor comment.	
-	public DeucesFoundationController (Deuces theGame, PileView foundationView) {
+	public DeucesControllerFoundation (Deuces theGame, PileView foundationView) {
 		super(theGame);
 		this.theGame = theGame;
 		this.src = foundationView;
@@ -56,21 +58,40 @@ public class DeucesFoundationController extends SolitaireReleasedAdapter {
 			c.releaseDraggingObject();
 			return;
 		}
-
-		// Determine the To Pile
+		
 		Pile foundation = (Pile) src.getModelElement();
-		Column wasteColumn = (Column) fromWidget.getModelElement();
 		
-		CardView cardView = (CardView) draggingWidget;
-		Card theCard = (Card) cardView.getModelElement();
+		if ( fromWidget instanceof FanPileView ) { // From WasteColumn
+			// Determine the To Pile
+			Column wasteColumn = (Column) fromWidget.getModelElement();
+			
+			CardView cardView = (CardView) draggingWidget;
+			Card theCard = (Card) cardView.getModelElement();
+			
+			Move move = new DeucesMoveWasteToFoundation(wasteColumn, foundation, theCard);
+			
+			if (move.doMove(theGame)) {
+				theGame.pushMove(move);
+				theGame.refreshWidgets(); // success move has been made.
+			} else {
+				// if the move was not successful return the widgets
+				fromWidget.returnWidget (draggingWidget);
+			}
+		} else if ( fromWidget instanceof ColumnView ){ // From Tableau column
+			// coming from a Tableau column [user may be trying to move multiple cards]
+			Column fromColumn = (Column) fromWidget.getModelElement();
+			
+			ColumnView columnView = (ColumnView) draggingWidget;
+			Column col = (Column) columnView.getModelElement();
 		
-		Move move = new WasteToFoundationMove(wasteColumn, foundation, theCard);
-		if (move.doMove(theGame)) {
-			theGame.pushMove(move);
-			theGame.refreshWidgets(); // success move has been made.
-		} else {
-			// if the move was not successful return the widgets
-			fromWidget.returnWidget (draggingWidget);
+			Move move = new DeucesMoveTableauToFoundation(fromColumn, foundation, col);
+			if (move.doMove(theGame)) {
+				theGame.pushMove(move);
+				theGame.refreshWidgets(); // success move has been made.
+			} else {
+				// if the move was not successful return the widgets
+				fromWidget.returnWidget (draggingWidget);
+			}
 		}
 		
 		// release the dragging object, (this will reset dragSource)
