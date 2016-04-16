@@ -6,7 +6,6 @@ import ks.common.games.Solitaire;
 import ks.common.games.SolitaireUndoAdapter;
 import ks.common.model.Card;
 import ks.common.model.Column;
-import ks.common.model.Deck;
 import ks.common.model.MultiDeck;
 import ks.common.model.Pile;
 import ks.common.view.CardImages;

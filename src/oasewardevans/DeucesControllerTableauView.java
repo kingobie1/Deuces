@@ -2,11 +2,9 @@ package oasewardevans;
 
 import java.awt.event.MouseEvent;
 
-import heineman.klondike.MoveCardToFoundationMove;
 import ks.common.controller.SolitaireReleasedAdapter;
 import ks.common.view.Container;
 import ks.common.view.FanPileView;
-import ks.common.model.BuildablePile;
 import ks.common.model.Card;
 import ks.common.model.Column;
 import ks.common.model.Move;

@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import ks.common.controller.SolitaireReleasedAdapter;
 import ks.common.model.Column;
 import ks.common.view.CardView;
-import ks.common.view.ColumnView;
 import ks.common.view.Container;
 import ks.common.view.FanPileView;
 import ks.common.view.Widget;
