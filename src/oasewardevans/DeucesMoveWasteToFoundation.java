@@ -36,21 +36,19 @@ public class DeucesMoveWasteToFoundation extends Move {
 
 	public boolean valid(Solitaire game) {
 		
-		if (foundationPile.empty()) {
-			// return true if moving an ace on top of a king of the same suit
-			if (cardBeingDragged.isAce() && foundationPile.peek().getRank() == 13 
-					&& cardBeingDragged.getSuit() == foundationPile.peek().getSuit()){
-				return true;
-			}
-			
-			// Make sure that the top card in the foundationPile is one RANK less:
-			if ( cardBeingDragged.getRank() != foundationPile.peek().getRank() + 1 ) { return false; }
-			
-			// Make sure that the top card in the foundationPile is of the same SUIT:
-			if ( cardBeingDragged.getSuit() != foundationPile.peek().getSuit()) { return false; }
-				
+
+		// return true if moving an ace on top of a king of the same suit
+		if (cardBeingDragged.isAce() && foundationPile.peek().getRank() == 13 
+				&& cardBeingDragged.getSuit() == foundationPile.peek().getSuit()){
+			return true;
 		}
 		
+		// Make sure that the top card in the foundationPile is one RANK less:
+		if ( cardBeingDragged.getRank() != foundationPile.peek().getRank() + 1 ) { return false; }
+		
+		// Make sure that the top card in the foundationPile is of the same SUIT:
+		if ( cardBeingDragged.getSuit() != foundationPile.peek().getSuit()) { return false; }
+				
 		// Card being dragged is of the same suit and one rank higher than the one in the foundation:
 		return true;
 	}

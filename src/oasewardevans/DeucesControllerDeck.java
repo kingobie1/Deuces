@@ -34,7 +34,7 @@ public class DeucesControllerDeck extends SolitaireReleasedAdapter {
 	 */
 	public void mousePressed (java.awt.event.MouseEvent me) {
 
-		// Attempting a DealFourCardMove
+		// Attempting a Deal
 		Move m = new DeucesMoveDealCard (stock, wasteColumn);
 		if (m.doMove(theGame)) {
 			theGame.pushMove (m);     // Successful DealFour Move
