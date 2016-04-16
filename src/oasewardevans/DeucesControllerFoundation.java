@@ -84,7 +84,7 @@ public class DeucesControllerFoundation extends SolitaireReleasedAdapter {
 			ColumnView columnView = (ColumnView) draggingWidget;
 			Column col = (Column) columnView.getModelElement();
 		
-			Move move = new DeucesMoveTableauToWaste ();
+			Move move = new DeucesMoveTableauToFoundation(fromColumn, foundation, col);
 			if (move.doMove(theGame)) {
 				theGame.pushMove(move);
 				theGame.refreshWidgets(); // success move has been made.

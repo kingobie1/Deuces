@@ -18,8 +18,7 @@ public class DeucesMoveWasteToFoundation extends Move {
 		this.cardBeingDragged = cardBeingDragged;
 	}
 	
-	
-	@Override
+
 	public boolean doMove(Solitaire game) {
 		if (!valid(game)) { return false; }
 		
@@ -28,7 +27,6 @@ public class DeucesMoveWasteToFoundation extends Move {
 		return true;
 	}
 
-	@Override
 	public boolean undo(Solitaire game) {
 
 		wasteColumn.add(foundationPile.get());
@@ -36,9 +34,8 @@ public class DeucesMoveWasteToFoundation extends Move {
 		return true;
 	}
 
-	@Override
 	public boolean valid(Solitaire game) {
-		//if ( wasteColumn.empty() ) { return false; }
+		if ( wasteColumn.empty() ) { return false; }
 		
 		// Make sure that the top card in the foundationPile is one RANK less:
 		if ( cardBeingDragged.getRank() != foundationPile.peek().getRank() + 1 ) { return false; }
