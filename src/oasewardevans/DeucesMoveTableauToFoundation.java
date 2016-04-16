@@ -28,6 +28,8 @@ public class DeucesMoveTableauToFoundation extends Move {
 			count++;
 		}
 		
+		game.updateScore(+count);
+		
 		return true;
 	}
 
@@ -38,10 +40,18 @@ public class DeucesMoveTableauToFoundation extends Move {
 			tableauColumnFrom.add(foundationPile.get());
 		}
 		
+		game.updateScore(-count);
 		return true;
 	}
 
 	public boolean valid(Solitaire game) {
+		if (columnBeingDragged.empty()){ return false; }
+		
+		// return true if moving an ace on top of a king of the same suit
+		if (columnBeingDragged.peek(0).isAce() && foundationPile.peek().getRank() == 13 
+				&& columnBeingDragged.peek(0).getSuit() == foundationPile.peek().getSuit()){
+			return true;
+		}
 		
 		// Make sure that the top card in the foundationPile is one RANK less:
 		if ( columnBeingDragged.peek().getRank() != foundationPile.peek().getRank() + 1 ) { return false; }
