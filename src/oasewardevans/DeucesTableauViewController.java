@@ -108,7 +108,7 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 
 		Column tableau = (Column) src.getModelElement();
 		
-		if ( fromWidget instanceof FanPileView ) {
+		if ( fromWidget instanceof FanPileView ) { 		// From wasteColumn
 			// Determine the To Pile
 			Column wasteColumn = (Column) fromWidget.getModelElement();
 			
@@ -123,9 +123,9 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 				// if the move was not successful return the widgets
 				fromWidget.returnWidget (draggingWidget);
 			}
-		} else if ( fromWidget instanceof ColumnView ) {
+		} else if ( fromWidget instanceof ColumnView ) { // From Tableau column
 			
-			// coming from a buildable pile [user may be trying to move multiple cards]
+			// coming from a Tableau column [user may be trying to move multiple cards]
 			Column fromColumn = (Column) fromWidget.getModelElement();
 			
 			ColumnView columnView = (ColumnView) draggingWidget;

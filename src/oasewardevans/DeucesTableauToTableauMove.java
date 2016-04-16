@@ -37,8 +37,13 @@ public class DeucesTableauToTableauMove extends Move {
 
 	@Override
 	public boolean undo(Solitaire game) {
+		tempColumn.removeAll();
+		
 		for (int i = 0; i < count; i++){
-			tableauColumnFrom.add(tableauColumnTo.get());
+			tempColumn.add(tableauColumnTo.get());
+		}
+		for (int i = 0; i < count; i++){
+			tableauColumnFrom.add(tempColumn.get());
 		}
 		
 		return true;
