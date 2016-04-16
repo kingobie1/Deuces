@@ -5,7 +5,7 @@ import ks.common.model.Card;
 import ks.common.model.Column;
 import ks.common.model.Move;
 
-public class DeucesTableauToTableauMove extends Move {
+public class DeucesMoveTableauToTableau extends Move {
 
 	Column tempColumn = new Column("temp");
 	Column tableauColumnFrom;
@@ -13,7 +13,7 @@ public class DeucesTableauToTableauMove extends Move {
 	Column columnBeingDragged;
 	private int count;
 	
-	DeucesTableauToTableauMove( Column source, Column destination, Column columnBeingDragged ){
+	DeucesMoveTableauToTableau( Column source, Column destination, Column columnBeingDragged ){
 		this.tableauColumnFrom = source;
 		this.tableauColumnTo = destination;
 		this.columnBeingDragged = columnBeingDragged;

@@ -3,7 +3,7 @@ package oasewardevans;
 import ks.common.games.Solitaire;
 import ks.common.model.Move;
 
-public class MoveDeucesTableauToWaste extends Move {
+public class DeucesMoveTableauToWaste extends Move {
 
 	@Override
 	public boolean doMove(Solitaire game) {

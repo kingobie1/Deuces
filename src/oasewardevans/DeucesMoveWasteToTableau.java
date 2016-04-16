@@ -5,13 +5,13 @@ import ks.common.model.Card;
 import ks.common.model.Column;
 import ks.common.model.Move;
 
-public class DeucesWasteToTableauMove extends Move {
+public class DeucesMoveWasteToTableau extends Move {
 	
 	Column wasteColumn;
 	Column tableauColumn;
 	Card cardBeingDragged;
 	
-	DeucesWasteToTableauMove( Column source, Column destination, Card cardBeingDragged ){
+	DeucesMoveWasteToTableau( Column source, Column destination, Card cardBeingDragged ){
 		this.wasteColumn = source;
 		this.tableauColumn = destination;
 		this.cardBeingDragged = cardBeingDragged;

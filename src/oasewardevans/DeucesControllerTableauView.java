@@ -15,7 +15,7 @@ import ks.common.view.ColumnView;
 import ks.common.view.Widget;
 
 
-public class DeucesTableauViewController extends SolitaireReleasedAdapter {
+public class DeucesControllerTableauView extends SolitaireReleasedAdapter {
 
 	// The Deuces Game.
 	protected Deuces theGame;
@@ -24,7 +24,7 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 	protected ColumnView src;
 
 	// FoundationController constructor comment.	
-	public DeucesTableauViewController (Deuces theGame, ColumnView tableauView) {
+	public DeucesControllerTableauView (Deuces theGame, ColumnView tableauView) {
 		super(theGame);
 		this.theGame = theGame;
 		this.src = tableauView;
@@ -115,7 +115,7 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 			CardView cardView = (CardView) draggingWidget;
 			Card theCard = (Card) cardView.getModelElement();
 		
-			Move move = new DeucesWasteToTableauMove(wasteColumn, tableau, theCard);
+			Move move = new DeucesMoveWasteToTableau(wasteColumn, tableau, theCard);
 			if (move.doMove(theGame)) {
 				theGame.pushMove(move);
 				theGame.refreshWidgets(); // success move has been made.
@@ -131,7 +131,7 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 			ColumnView columnView = (ColumnView) draggingWidget;
 			Column col = (Column) columnView.getModelElement();
 		
-			Move move = new DeucesTableauToTableauMove (fromColumn, tableau, col);
+			Move move = new DeucesMoveTableauToTableau (fromColumn, tableau, col);
 			if (move.doMove(theGame)) {
 				theGame.pushMove(move);
 				theGame.refreshWidgets(); // success move has been made.

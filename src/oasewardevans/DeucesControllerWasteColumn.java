@@ -10,10 +10,10 @@ import ks.common.view.Container;
 import ks.common.view.FanPileView;
 import ks.common.view.Widget;
 
-public class DeucesWasteColumnController extends SolitaireReleasedAdapter {
+public class DeucesControllerWasteColumn extends SolitaireReleasedAdapter {
 	FanPileView src;
 
-	public DeucesWasteColumnController(Deuces theGame, FanPileView src) {
+	public DeucesControllerWasteColumn(Deuces theGame, FanPileView src) {
 		// hand off top card in pile to container
 		// know waste pile, destination pile, card dragged
 		super(theGame);

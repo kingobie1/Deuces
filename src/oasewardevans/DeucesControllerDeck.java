@@ -7,7 +7,7 @@ import ks.common.model.Move;
 
 /**
  */
-public class DeucesDeckController extends SolitaireReleasedAdapter {
+public class DeucesControllerDeck extends SolitaireReleasedAdapter {
 	/** The game. */
 	protected Deuces theGame;
 
@@ -20,7 +20,7 @@ public class DeucesDeckController extends SolitaireReleasedAdapter {
 	/**
 	 * DeucesDeckController constructor comment.
 	 */
-	public DeucesDeckController(Deuces theGame, MultiDeck s, Column wasteColumn) {
+	public DeucesControllerDeck(Deuces theGame, MultiDeck s, Column wasteColumn) {
 		super(theGame);
 
 		this.theGame = theGame;
@@ -35,7 +35,7 @@ public class DeucesDeckController extends SolitaireReleasedAdapter {
 	public void mousePressed (java.awt.event.MouseEvent me) {
 
 		// Attempting a DealFourCardMove
-		Move m = new DealCardMove (stock, wasteColumn);
+		Move m = new DeucesMoveDealCard (stock, wasteColumn);
 		if (m.doMove(theGame)) {
 			theGame.pushMove (m);     // Successful DealFour Move
 			theGame.refreshWidgets(); // refresh updated widgets.

@@ -15,7 +15,7 @@ import ks.common.view.PileView;
 import ks.common.view.Widget;
 
 
-public class DeucesFoundationController extends SolitaireReleasedAdapter {
+public class DeucesControllerFoundation extends SolitaireReleasedAdapter {
 
 	// The Deuces Game.
 	protected Deuces theGame;
@@ -24,7 +24,7 @@ public class DeucesFoundationController extends SolitaireReleasedAdapter {
 	protected PileView src;
 
 	// FoundationController constructor comment.	
-	public DeucesFoundationController (Deuces theGame, PileView foundationView) {
+	public DeucesControllerFoundation (Deuces theGame, PileView foundationView) {
 		super(theGame);
 		this.theGame = theGame;
 		this.src = foundationView;
@@ -68,7 +68,7 @@ public class DeucesFoundationController extends SolitaireReleasedAdapter {
 			CardView cardView = (CardView) draggingWidget;
 			Card theCard = (Card) cardView.getModelElement();
 			
-			Move move = new WasteToFoundationMove(wasteColumn, foundation, theCard);
+			Move move = new DeucesMoveWasteToFoundation(wasteColumn, foundation, theCard);
 			
 			if (move.doMove(theGame)) {
 				theGame.pushMove(move);
@@ -84,7 +84,7 @@ public class DeucesFoundationController extends SolitaireReleasedAdapter {
 			ColumnView columnView = (ColumnView) draggingWidget;
 			Column col = (Column) columnView.getModelElement();
 		
-			Move move = new MoveDeucesTableauToWaste ();
+			Move move = new DeucesMoveTableauToWaste ();
 			if (move.doMove(theGame)) {
 				theGame.pushMove(move);
 				theGame.refreshWidgets(); // success move has been made.

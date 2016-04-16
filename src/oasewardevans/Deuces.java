@@ -1,6 +1,6 @@
 package oasewardevans;
 
-import oasewardevans.DeucesDeckController;
+import oasewardevans.DeucesControllerDeck;
 import ks.common.controller.SolitaireMouseMotionAdapter;
 import ks.common.games.Solitaire;
 import ks.common.games.SolitaireUndoAdapter;
@@ -24,7 +24,7 @@ public class Deuces extends Solitaire {
 
 	// attributes
 	MultiDeck stock;
-	
+	 
 	Column wasteColumn;
 	Pile foundation[] = new Pile[12]; // add four Piles as foundation. Extra size is to enable easier algorithms.
 	Column tableau[] = new Column[14]; // add four Columns as tableau. Extra size is to enable easier algorithms.
@@ -56,24 +56,24 @@ public class Deuces extends Solitaire {
 
 	private void initializeControllers() {
 		// Initialize Controllers for DeckView
-		stockView.setMouseAdapter(new DeucesDeckController (this, stock, wasteColumn));
+		stockView.setMouseAdapter(new DeucesControllerDeck (this, stock, wasteColumn));
 		stockView.setMouseMotionAdapter (new SolitaireMouseMotionAdapter(this));
 		stockView.setUndoAdapter (new SolitaireUndoAdapter(this));
 		
-		wasteView.setMouseAdapter(new DeucesWasteColumnController (this, wasteView));
+		wasteView.setMouseAdapter(new DeucesControllerWasteColumn (this, wasteView));
 		wasteView.setMouseMotionAdapter (new SolitaireMouseMotionAdapter(this));
 		wasteView.setUndoAdapter (new SolitaireUndoAdapter(this));
 		
 		// Now for each Foundation.
 		for (int i = 1; i <= 8; i++) {
-			foundationView[i].setMouseAdapter (new DeucesFoundationController (this, foundationView[i]));
+			foundationView[i].setMouseAdapter (new DeucesControllerFoundation (this, foundationView[i]));
 			foundationView[i].setMouseMotionAdapter (new SolitaireMouseMotionAdapter (this));
 			foundationView[i].setUndoAdapter (new SolitaireUndoAdapter(this));
 		}
 		
 		// Now for each Foundation.
 		for (int i = 1; i <= 10; i++){
-			tableauView[i].setMouseAdapter (new DeucesTableauViewController (this, tableauView[i]));
+			tableauView[i].setMouseAdapter (new DeucesControllerTableauView (this, tableauView[i]));
 			tableauView[i].setMouseMotionAdapter (new SolitaireMouseMotionAdapter (this));
 			tableauView[i].setUndoAdapter (new SolitaireUndoAdapter(this));
 		}

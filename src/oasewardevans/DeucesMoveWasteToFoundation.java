@@ -6,13 +6,13 @@ import ks.common.model.Column;
 import ks.common.model.Move;
 import ks.common.model.Pile;
 
-public class WasteToFoundationMove extends Move {
+public class DeucesMoveWasteToFoundation extends Move {
 
 	Column wasteColumn;
 	Pile foundationPile;
 	Card cardBeingDragged;
 	
-	WasteToFoundationMove( Column source, Pile destination, Card cardBeingDragged ){
+	DeucesMoveWasteToFoundation( Column source, Pile destination, Card cardBeingDragged ){
 		this.wasteColumn = source;
 		this.foundationPile = destination;
 		this.cardBeingDragged = cardBeingDragged;
