@@ -19,13 +19,11 @@ public class TestDealCardMove extends TestCase {
 		assertTrue(dcm.valid(deuces));
 		assertEquals(86, deuces.stock.count());
 		
-		
 		// Deal a card:
 		dcm.doMove(deuces);
 		
 		assertEquals(topCard, deuces.wasteColumn.peek());
 		assertEquals(85, deuces.stock.count());
-		
 		
 		int value = deuces.getNumLeft().getValue();
 		assertEquals(85, value);
