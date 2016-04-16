@@ -2,8 +2,10 @@ package oasewardevans;
 
 import java.awt.event.MouseEvent;
 
+import heineman.klondike.MoveCardToFoundationMove;
 import ks.common.controller.SolitaireReleasedAdapter;
 import ks.common.view.Container;
+import ks.common.model.BuildablePile;
 import ks.common.model.Card;
 import ks.common.model.Column;
 import ks.common.model.Move;
@@ -17,7 +19,7 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 	// The Deuces Game.
 	protected Deuces theGame;
 
-	// The specific Foundation pileView being controlled.
+	// The specific Foundation ColumnView being controlled.
 	protected ColumnView src;
 
 	// FoundationController constructor comment.	
@@ -30,8 +32,8 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 	public void mousePressed(MouseEvent me) {
 		 
 		// The container manages several critical pieces of information; namely, it
-		// is responsible for the draggingObject; in our case, this would be a CardView
-		// Widget managing the card we are trying to drag between two piles.
+		// is responsible for the draggingObject; in our case, this would be a ColumnView
+		// Widget managing the column we are trying to drag between two other columns.
 		Container c = theGame.getContainer();
 		
 		/** Return if there is no card to be chosen. */
@@ -41,28 +43,27 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 			return;
 		}
 	
-		// Get a card to move from PileView. Note: this returns a CardView.
-		// Note that this method will alter the model for PileView if the condition is met.
-		//ColumnView columnView = src.getColumnView(me);
-		CardView cardView = src.getCardViewForTopCard (me);
+		// Get a column (sequence of cards) to move from columnView. Note: this returns a columnView.
+		// Note that this method will alter the model for columnView if the condition is met.
+		ColumnView columnView = src.getColumnView(me);
 		
 		// an invalid selection of some sort.
-		if (cardView == null) {
+		if (columnView == null) {
 			c.releaseDraggingObject();
 			return;
 		}
 		
-		// If we get here, then the user has indeed clicked on the top card in the PileView and
+		// If we get here, then the user has indeed clicked on the top card in the columnView and
 		// we are able to now move it on the screen at will. For smooth action, the bounds for the
-		// cardView widget reflect the original card location on the screen.
+		// columnView (sequence of cards) widget reflect the original column's (sequence of cards) location on the screen.
 		Widget w = c.getActiveDraggingObject();
 		if (w != Container.getNothingBeingDragged()) {
-			System.err.println ("WastePileController::mousePressed(): Unexpectedly encountered a Dragging Object during a Mouse press.");
+			System.err.println ("DeucesTableauViewController::mousePressed(): Unexpectedly encountered a Dragging Object during a Mouse press.");
 			return;
 		}
 	
 		// Tell container which object is being dragged, and where in that widget the user clicked.
-		c.setActiveDraggingObject (cardView, me);
+		c.setActiveDraggingObject (columnView, me);
 		
 		// Tell container which source widget initiated the drag
 		c.setDragSource (src);
@@ -91,7 +92,7 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 		/** Return if there is no card being dragged chosen. */
 		Widget draggingWidget = c.getActiveDraggingObject();
 		if (draggingWidget == Container.getNothingBeingDragged()) {
-			System.err.println ("FoundationController::mouseReleased() unexpectedly found nothing being dragged.");
+			System.err.println ("DeucesTableauViewController::mouseReleased() unexpectedly found nothing being dragged.");
 			c.releaseDraggingObject();		
 			return;
 		}
@@ -99,14 +100,15 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 		/** Recover the from BuildablePile OR waste Pile */
 		Widget fromWidget = c.getDragSource();
 		if (fromWidget == null) {
-			System.err.println ("FoundationController::mouseReleased(): somehow no dragSource in container.");
+			System.err.println ("DeucesTableauViewController::mouseReleased(): somehow no dragSource in container.");
 			c.releaseDraggingObject();
 			return;
 		}
 
-		//if ( fromWidget instanceof ColumnView ) {
+		Column tableau = (Column) src.getModelElement();
+		
+		if ( fromWidget instanceof CardView ) {
 			// Determine the To Pile
-			Column tableau = (Column) src.getModelElement();
 			Column wasteColumn = (Column) fromWidget.getModelElement();
 			
 			CardView cardView = (CardView) draggingWidget;
@@ -120,7 +122,23 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 				// if the move was not successful return the widgets
 				fromWidget.returnWidget (draggingWidget);
 			}
-		//}
+		} else if ( fromWidget instanceof ColumnView ) {
+			
+			// coming from a buildable pile [user may be trying to move multiple cards]
+			Column fromColumn = (Column) fromWidget.getModelElement();
+			
+			ColumnView columnView = (ColumnView) draggingWidget;
+			Column col = (Column) columnView.getModelElement();
+		
+			Move move = new DeucesTableauToTableauMove (fromColumn, tableau, col);
+			if (move.doMove(theGame)) {
+				theGame.pushMove(move);
+				theGame.refreshWidgets(); // success move has been made.
+			} else {
+				// if the move was not successful return the widgets
+				fromWidget.returnWidget (draggingWidget);
+			}
+		}
 		
 		// release the dragging object, (this will reset dragSource)
 		c.releaseDraggingObject();
