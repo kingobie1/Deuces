@@ -56,15 +56,21 @@ public class DeucesFoundationController extends SolitaireReleasedAdapter {
 			c.releaseDraggingObject();
 			return;
 		}
-
-		// Determine the To Pile
+		
 		Pile foundation = (Pile) src.getModelElement();
-		Column wasteColumn = (Column) fromWidget.getModelElement();
 		
-		CardView cardView = (CardView) draggingWidget;
-		Card theCard = (Card) cardView.getModelElement();
+		// TODO: fix this:
+//		if (true) {
+			// Determine the To Pile
+			
+			Column wasteColumn = (Column) fromWidget.getModelElement();
+			
+			CardView cardView = (CardView) draggingWidget;
+			Card theCard = (Card) cardView.getModelElement();
+			
+			Move move = new WasteToFoundationMove(wasteColumn, foundation, theCard);
+//		}
 		
-		Move move = new WasteToFoundationMove(wasteColumn, foundation, theCard);
 		if (move.doMove(theGame)) {
 			theGame.pushMove(move);
 			theGame.refreshWidgets(); // success move has been made.

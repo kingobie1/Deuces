@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import heineman.klondike.MoveCardToFoundationMove;
 import ks.common.controller.SolitaireReleasedAdapter;
 import ks.common.view.Container;
+import ks.common.view.FanPileView;
 import ks.common.model.BuildablePile;
 import ks.common.model.Card;
 import ks.common.model.Column;
@@ -107,7 +108,7 @@ public class DeucesTableauViewController extends SolitaireReleasedAdapter {
 
 		Column tableau = (Column) src.getModelElement();
 		
-		if ( fromWidget instanceof CardView ) {
+		if ( fromWidget instanceof FanPileView ) {
 			// Determine the To Pile
 			Column wasteColumn = (Column) fromWidget.getModelElement();
 			

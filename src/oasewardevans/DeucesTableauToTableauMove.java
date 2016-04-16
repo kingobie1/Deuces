@@ -7,6 +7,7 @@ import ks.common.model.Move;
 
 public class DeucesTableauToTableauMove extends Move {
 
+	Column tempColumn = new Column("temp");
 	Column tableauColumnFrom;
 	Column tableauColumnTo;
 	Column columnBeingDragged;
@@ -24,8 +25,11 @@ public class DeucesTableauToTableauMove extends Move {
 		
 		// if the column is not put next card into the tableau:
 		while (!columnBeingDragged.empty()){
-			tableauColumnTo.add(columnBeingDragged.get());
+			tempColumn.add(columnBeingDragged.get());
 			count++;
+		}
+		while (!tempColumn.empty()){
+			tableauColumnTo.add(tempColumn.get());
 		}
 		
 		return true;
@@ -42,13 +46,17 @@ public class DeucesTableauToTableauMove extends Move {
 
 	@Override
 	public boolean valid(Solitaire game) {
-		//if ( wasteColumn.empty() ) { return false; }
 		
-		// Make sure that the top card in the tableauColumn is one RANK less:
-		if ( columnBeingDragged.peek(count).getRank() != tableauColumnTo.peek().getRank() - 1 ) { return false; }
+		int numCardsColumnBeingDragged = columnBeingDragged.count();
+		System.out.print(numCardsColumnBeingDragged);
 		
-		// Make sure that the top card in the tableauColumn is of the same SUIT:
-		if ( columnBeingDragged.peek(count).getSuit() != tableauColumnTo.peek().getSuit()) { return false; }
+		if (!tableauColumnTo.empty()){
+			// Make sure that the top card in the tableauColumn is one RANK less:
+			if ( columnBeingDragged.peek(0).getRank() != tableauColumnTo.peek().getRank() - 1 ) { return false; }
+			
+			// Make sure that the top card in the tableauColumn is of the same SUIT:
+			if ( columnBeingDragged.peek(0).getSuit() != tableauColumnTo.peek().getSuit()) { return false; }
+		}
 		
 		// Card being dragged is of the same suit and one rank higher than the one in the tableauColumn:
 		return true;

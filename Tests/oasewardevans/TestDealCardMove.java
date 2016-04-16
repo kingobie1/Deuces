@@ -34,5 +34,4 @@ public class TestDealCardMove extends TestCase {
 		
 		assertEquals(86, deuces.stock.count());
 	}
-
 }
