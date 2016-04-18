@@ -185,8 +185,8 @@ public class Deuces extends Solitaire {
 	
 	// Code to launch Solitaire variation
 	public static void main(String[] args){
-//		Main.generateWindow(new Deuces(), 123);
-		Main.generateWindow(new Deuces(), Deck.OrderBySuit);
+		Main.generateWindow(new Deuces(), 123);
+//		Main.generateWindow(new Deuces(), Deck.OrderBySuit);
 	}
 
 
