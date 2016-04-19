@@ -1,6 +1,9 @@
 package oasewardevans;
 
 import oasewardevans.DeucesControllerDeck;
+
+import java.awt.Dimension;
+
 import ks.common.controller.SolitaireMouseMotionAdapter;
 import ks.common.games.Solitaire;
 import ks.common.games.SolitaireUndoAdapter;
@@ -21,6 +24,13 @@ public class Deuces extends Solitaire {
 	/* initialize model */
 	
 	private static final int COL_HEIGHT = 340;
+	
+	// Change the dimension of screen:
+	public Dimension getPreferredSize() {
+		// default starting dimensions...
+		//return new Dimension(769, 635);
+		return new Dimension(1040, 700);
+	}
 
 	// attributes
 	MultiDeck stock;
