@@ -28,7 +28,7 @@ public class Deuces extends Solitaire {
 	// Change the dimension of screen:
 	public Dimension getPreferredSize() {
 		// default starting dimensions...
-		//return new Dimension(769, 635);
+		// return new Dimension(769, 635);
 		return new Dimension(1040, 700);
 	}
 
