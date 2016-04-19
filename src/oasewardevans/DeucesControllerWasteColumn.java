@@ -33,7 +33,7 @@ public class DeucesControllerWasteColumn extends SolitaireReleasedAdapter {
 			return;
 		}
 	
-		// Get a card to move from PileView. Note: this returns a CardView.
+		// Get a card to move from cardView. Note: this returns a CardView.
 		// Note that this method will alter the model for PileView if the condition is met.
 		CardView cardView = src.getCardViewForTopCard (me);
 		
@@ -43,7 +43,7 @@ public class DeucesControllerWasteColumn extends SolitaireReleasedAdapter {
 			return;
 		}
 		
-		// If we get here, then the user has indeed clicked on the top card in the PileView and
+		// If we get here, then the user has indeed clicked on the top card in the cardView and
 		// we are able to now move it on the screen at will. For smooth action, the bounds for the
 		// cardView widget reflect the original card location on the screen.
 		Widget w = c.getActiveDraggingObject();

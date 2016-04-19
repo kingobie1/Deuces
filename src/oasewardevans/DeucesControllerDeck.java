@@ -37,7 +37,7 @@ public class DeucesControllerDeck extends SolitaireReleasedAdapter {
 		// Attempting a Deal
 		Move m = new DeucesMoveDealCard (stock, wasteColumn);
 		if (m.doMove(theGame)) {
-			theGame.pushMove (m);     // Successful DealFour Move
+			theGame.pushMove (m);     // Successful DeucesMoveDealCard Move
 			theGame.refreshWidgets(); // refresh updated widgets.
 		}
 	}

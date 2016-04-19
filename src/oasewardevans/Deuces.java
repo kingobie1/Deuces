@@ -9,7 +9,6 @@ import ks.common.games.Solitaire;
 import ks.common.games.SolitaireUndoAdapter;
 import ks.common.model.Card;
 import ks.common.model.Column;
-import ks.common.model.Deck;
 import ks.common.model.MultiDeck;
 import ks.common.model.Pile;
 import ks.common.view.CardImages;
@@ -25,7 +24,7 @@ public class Deuces extends Solitaire {
 	
 	private static final int COL_HEIGHT = 340;
 	
-	// Change the dimension of screen:
+	/** Change Demension Size */
 	public Dimension getPreferredSize() {
 		// default starting dimensions...
 		// return new Dimension(769, 635);
@@ -81,7 +80,7 @@ public class Deuces extends Solitaire {
 			foundationView[i].setUndoAdapter (new SolitaireUndoAdapter(this));
 		}
 		
-		// Now for each Foundation.
+		// Now for each Tableau.
 		for (int i = 1; i <= 10; i++){
 			tableauView[i].setMouseAdapter (new DeucesControllerTableauView (this, tableauView[i]));
 			tableauView[i].setMouseMotionAdapter (new SolitaireMouseMotionAdapter (this));
